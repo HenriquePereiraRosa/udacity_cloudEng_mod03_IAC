@@ -18,3 +18,8 @@ Resources:
           unzip -o udacity.zip
   Outputs: 
   #Bonus points for useful outputs!
+    # StackIAM:
+    #   Description: The ID of the IAM
+    #   Value: !Ref MyVPC
+    #   Export:
+    #     Name: !Sub "${AWS::StackName}-VPCID"
