@@ -1,7 +1,7 @@
 [
 	{
 		"ParameterKey": "EnvironmentName",
-		"ParameterValue": "Udacity_Cloud_Mod03_Project"
+		"ParameterValue": "UdacityCloudMod03Project"
 	},
 	{
 		"ParameterKey": "VpcCIDR",

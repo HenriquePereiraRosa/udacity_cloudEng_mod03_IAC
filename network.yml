@@ -1,5 +1,5 @@
 Description: >
-    Carlos Rivas / Udacity
+    Henrique Pereira Rosa / Udacity Cloud Mod03
     This template deploys a VPC, with a pair of public and private subnets spread 
     across two Availabilty Zones. It deploys an Internet Gateway, with a default 
     route on the public subnets. It deploys a pair of NAT Gateways (one in each AZ), 
@@ -12,29 +12,34 @@ Parameters:
         Type: String
 
     VpcCIDR: 
-        Description: Please enter the IP range (CIDR notation) for this VPC
+        Description: IP range (CIDR notation) for this VPC
         Type: String
         Default: 10.0.0.0/16
 
     PublicSubnet1CIDR:
-        Description: Please enter the IP range (CIDR notation) for the public subnet in the first Availability Zone
+        Description: IP range (CIDR notation) for the public subnet in the 1st AZ
         Type: String
         Default: 10.0.0.0/24
 
     PublicSubnet2CIDR:
-        Description: Please enter the IP range (CIDR notation) for the public subnet in the second Availability Zone
+        Description: IP range (CIDR notation) for the public subnet in the 2nd AZ
         Type: String
         Default: 10.0.1.0/24
 
     PrivateSubnet1CIDR:
-        Description: Please enter the IP range (CIDR notation) for the private subnet in the first Availability Zone
+        Description: IP range (CIDR notation) for the private subnet in the 1st AZ
         Type: String
         Default: 10.0.2.0/24
 
     PrivateSubnet2CIDR:
-        Description: Please enter the IP range (CIDR notation) for the private subnet in the second Availability Zone
+        Description: IP range (CIDR notation) for the private subnet in the 2nd AZ
         Type: String
         Default: 10.0.3.0/24
+
+    BucketS3:
+        Description: BucketS3
+        Type: String
+        Default: s3://udacity-demo-1
 
 Resources:
 

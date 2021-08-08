@@ -1,12 +1,20 @@
 Description: >
-    Carlos Rivas / Udacity 2019
+    Udacity Cloud Engineering Nano Mod03
+    Final project of Udacity Cloud Engineering Nanodegree's 3th Module
 
 Parameters:
 
     EnvironmentName:
-        Description: An environment name that will be prefixed to resource names
+        Description: The Project Name
         Type: String
+
 Resources:
+  #instace profile contains the IAM Role name(s) that we want to associate to our auto scaling EC2 Servers
+  ProfileWithRolesForOurApp:
+    Type: AWS::IAM::InstanceProfile
+    Properties: 
+      Roles:
+        - S3ReadOnlyEC2
   LBSecGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -50,10 +58,13 @@ Resources:
     Properties:
       UserData:
         Fn::Base64: !Sub |
-          #!/bin/bash
-          sudo apt-get update -y
-          sudo apt-get install apache2 -y
-          sudo systemctl start apache2.service          
+          apt-get update -y
+          apt-get install unzip awscli -y
+          apt-get install apache2 -y
+          systemctl start apache2.service
+          cd /var/www/html
+          aws s3 cp s3://udacity-demo-1/udacity.zip .
+          unzip -o udacity.zip     
       ImageId: ami-005bdb005fb00e791
       KeyName: that-one
       SecurityGroups:
