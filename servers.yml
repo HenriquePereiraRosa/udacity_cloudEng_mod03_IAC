@@ -10,11 +10,27 @@ Parameters:
 
 Resources:
   #instace profile contains the IAM Role name(s) that we want to associate to our auto scaling EC2 Servers
-  ProfileWithRolesForOurApp:
-    Type: AWS::IAM::InstanceProfile
-    Properties: 
-      Roles:
-        - S3ReadOnlyEC2
+  # SampleBucketPolicy:
+  # Type: 'AWS::S3::BucketPolicy'
+  # Properties:
+  #   Bucket: !Ref DOC-EXAMPLE-BUCKET
+  #   PolicyDocument:
+  #     Version: 2012-10-17
+  #     Statement:
+  #       - Action:
+  #           - 's3:GetObject'
+  #         Effect: Allow
+  #         Resource: !Join
+  #           - ''
+  #           - - 'arn:aws:s3:::'
+  #             - !Ref DOC-EXAMPLE-BUCKET
+  #             - /*
+  #         Principal: '*'
+  #         Condition:
+  #           StringLike:
+  #             'aws:Referer':
+  #               - 'http://www.example.com/*'
+  #               - 'http://example.net/*'
   LBSecGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
