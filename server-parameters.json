@@ -2,5 +2,9 @@
 	{
 		"ParameterKey": "EnvironmentName",
 		"ParameterValue": "UdacityCloudMod03Project"
+	},
+	{
+	  "ParameterKey": "AMIID",
+	  "ParameterValue": "ami-047a51fa27710816e"
 	}
 ]

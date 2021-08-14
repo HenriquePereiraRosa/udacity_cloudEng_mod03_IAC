@@ -4,9 +4,12 @@ Description: >
 
 Parameters:
 
-    EnvironmentName:
-        Description: The Project Name
-        Type: String
+  EnvironmentName:
+      Description: The Project Name
+      Type: String
+  AMIID:
+      Description: AMI to use for our base image
+      Type: String
 
 Resources:
   #instace profile contains the IAM Role name(s) that we want to associate to our auto scaling EC2 Servers
@@ -61,6 +64,10 @@ Resources:
         ToPort: 8080
         CidrIp: 0.0.0.0/0
       - IpProtocol: tcp
+        FromPort: 80
+        ToPort: 80
+        CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp
         FromPort: 22
         ToPort: 22
         CidrIp: 0.0.0.0/0
@@ -80,9 +87,9 @@ Resources:
           systemctl start apache2.service
           cd /var/www/html
           aws s3 cp s3://udacity-demo-1/udacity.zip .
-          unzip -o udacity.zip     
-      ImageId: ami-0b6ec84d8846bced8
-      KeyName: that-one
+          unzip -o udacity.zip   
+      ImageId: !Ref AMIID
+      # KeyName: to-find-out
       SecurityGroups:
       - Ref: WebServerSecGroup
       InstanceType: t3.medium

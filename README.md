@@ -5,4 +5,4 @@ Udacity Cloud Engineer Nanodegree - Mod 03 - Deploy Infrastructure as Code (IAC)
  sudo ./create.sh network network.yml network-parameters.json
  
 ## 2nd Step: Servers creation
- sudo ./create.sh servers servers.yml servers-parameters.json
+ sudo ./create.sh servers servers.yml server-parameters.json
