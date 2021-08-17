@@ -125,11 +125,11 @@ Resources:
           apt-get install apache2 -y
           systemctl start apache2.service
           cd /var/www/html
-          echo "Hello World!" > index.html
+          echo "Hello World" > index.html
           aws s3 cp s3://udacity-demo-1/udacity.zip .
           unzip -o udacity.zip   
       ImageId: !Ref AMIID
-      KeyName: mod03Key
+      # KeyName: mod03Key
       IamInstanceProfile: !Ref AppInstanceProfile
       SecurityGroups:
       - Ref: WebServerSecGroup
