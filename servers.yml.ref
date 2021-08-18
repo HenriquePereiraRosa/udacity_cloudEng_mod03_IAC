@@ -14,26 +14,38 @@ Parameters:
 Resources:
 
   UdacityS3ReadOnlyEC2:
-      Type: 'AWS::IAM::Role'
+      Type: AWS::IAM::Role
       Properties:
-        AssumeRolePolicyDocument:
-          Version: 2012-10-17
-          Statement:
-            - Effect: Allow
-              Principal:
-                Service:
-                - ec2.amazonaws.com
-              Action:
-                - 'sts:AssumeRole'
-        Path: /
-        Policies:
-          - PolicyName: root
-            PolicyDocument:
-              Version: 2012-10-17
+          RoleName: 
+              !Sub ${EnvironmentName}-Role
+          AssumeRolePolicyDocument:
+              Version: "2012-10-17"
               Statement:
-                - Effect: Allow
-                  Action: '*'
-                  Resource: '*'
+              -   Effect: Allow
+                  Principal:
+                      Service:
+                      - ec2.amazonaws.com
+                  Action:
+                  - sts:AssumeRole
+          Path: "/"
+
+  RolePolicies:
+      Type: AWS::IAM::Policy
+      Properties:
+          PolicyName: AmazonS3ReadOnlyAccess
+          PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+              - 
+                  Effect: Allow
+                  Action: 
+                  -   s3:Get*
+                  -   s3:List*
+                  Resource: 
+                  -   arn:aws:s3:::udacity-demo-1
+                  -   arn:aws:s3:::udacity-demo-1/*
+          Roles:
+          -   Ref: UdacityS3ReadOnlyEC2
 
   AppInstanceProfile:
       Type: AWS::IAM::InstanceProfile
@@ -51,8 +63,20 @@ Resources:
           !Sub "${EnvironmentName}-VPCID"
       SecurityGroupIngress:
       - IpProtocol: tcp
+        FromPort: 8080
+        ToPort: 8080
+        CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp
         FromPort: 80
         ToPort: 80
+        CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp
+        FromPort: 22
+        ToPort: 22
+        CidrIp: 0.0.0.0/0
+      - IpProtocol: icmp
+        FromPort: -1
+        ToPort: -1
         CidrIp: 0.0.0.0/0
       SecurityGroupEgress:
       - IpProtocol: tcp
@@ -69,8 +93,20 @@ Resources:
           !Sub "${EnvironmentName}-VPCID"
       SecurityGroupIngress:
       - IpProtocol: tcp
+        FromPort: 8080
+        ToPort: 8080
+        CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp
         FromPort: 80
         ToPort: 80
+        CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp
+        FromPort: 22
+        ToPort: 22
+        CidrIp: 0.0.0.0/0
+      - IpProtocol: icmp
+        FromPort: -1
+        ToPort: -1
         CidrIp: 0.0.0.0/0
       SecurityGroupEgress:
       - IpProtocol: tcp
